@@ -1,14 +1,18 @@
 package com.bosssoft.mytask.controller;
 
+import com.bosssoft.mytask.entity.Applicant;
 import com.bosssoft.mytask.entity.Task;
 import com.bosssoft.mytask.entity.jsonResult;
 import com.bosssoft.mytask.service.TaskService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpSession;
+import java.text.DateFormat;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
 @Controller
@@ -22,12 +26,30 @@ public class TaskController {
     //查询所有条目
     @RequestMapping("findAll")
     @ResponseBody
-    public jsonResult findAll(Model model){
+    public jsonResult findAll(HttpSession session){
        List<Task> tasks = taskService.findAll();
+       taskService.totalPrice(tasks);
+        Applicant applicant = new Applicant();
+        Date date = new Date();
+        DateFormat df1 = DateFormat.getDateInstance();
+        df1.format(date);
+        double TOTAL_PRICE = 0;
+        for(Task task:tasks){
+            TOTAL_PRICE += task.getTotalprice();
+        }
+       HashMap<String,Object> hashMap = new HashMap<String, Object>();
+        hashMap.put("applicantName",applicant.getApplicantName());
+        hashMap.put("departName",applicant.getDepartName());
+        hashMap.put("applicationdate",df1.format(date));
+        hashMap.put("Tasks",tasks);
+        hashMap.put("totalprice",TOTAL_PRICE);
 
-       //model.addAttribute("tasks",tasks);
-       //System.out.println("num"+tasks.size());
-       return jsonResult.ok(tasks);
+       jsonResult jsonResult = com.bosssoft.mytask.entity.jsonResult.ok(hashMap);
+       session.setAttribute("alltasks","jsonResult");
+       //return "alltasks";
+
+
+       return jsonResult.ok(hashMap);
     }
 
     //添加条目

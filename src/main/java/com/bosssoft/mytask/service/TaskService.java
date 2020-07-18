@@ -15,6 +15,9 @@ public interface TaskService {
     //删除条目
     void deleteTaskByName(String name);
 
+    //计算条目总价
+    void totalPrice(List<Task> tasks);
+
     //查询单条目
     //Task selectTaskByName(String name);
 }

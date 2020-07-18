@@ -12,6 +12,17 @@
          select name,typeid,location,num,time from mytask.task;
     </select>
 
+    <select id="getItemName" resultType="String">
+        select name from mytask.task;
+    </select>
+
+    <select id="getItemNum" parameterType="String" resultType="Integer">
+        select num from mytask.task where name = #{name};
+    </select>
+    <select id="getItemPrice" parameterType="String" resultType="Double">
+        select price from mytask.mall where mall.itemName = #{name};
+    </select>
+
     <!--删除条目-->
     <delete id="deleteTaskByName" parameterType="String">
          delete from mytask.task where name = #{name}
