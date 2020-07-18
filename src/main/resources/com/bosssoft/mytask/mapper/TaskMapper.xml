@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bosssoft.mytask.dao.TaskDao">
+
+    <!--保存条目-->
+    <insert id="addTask" parameterType="com.bosssoft.mytask.entity.Task">
+        insert into mytask.task values (#{name,jdbcType = VARCHAR},#{typeid,jdbcType = INTEGER},#{num,jdbcType = INTEGER},#{location,jdbcType = VARCHAR},#{time,jdbcType = VARCHAR});
+    </insert>
+
+    <!--查询条目-->
+    <select id="findAll"  resultType="com.bosssoft.mytask.entity.Task">
+         select name,typeid,location,num,time from mytask.task;
+    </select>
+
+    <!--删除条目-->
+    <delete id="deleteTaskByName" parameterType="String">
+         delete from mytask.task where name = #{name}
+    </delete>
+
+    <!--<select id="selectTaskByName" parameterType="String" resultType="com.bosssoft.mytask.entity.Task">
+        select name,typeid,location,num,time from mytask.task where name = #{name};
+    </select>-->
+</mapper>
