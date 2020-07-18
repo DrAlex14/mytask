@@ -20,6 +20,12 @@ public interface TaskDao {
     //删除条目的方法
     void deleteTaskByName(String name);
 
+    List<String> getItemName();
+
+    Integer getItemNum(String name);
+
+    double getItemPrice(String name);
+
     //查询单条目的方法
     //Task selectTaskByName(String name);
 }
