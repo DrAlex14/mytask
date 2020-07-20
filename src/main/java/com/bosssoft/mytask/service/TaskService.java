@@ -18,6 +18,4 @@ public interface TaskService {
     //计算条目总价
     void totalPrice(List<Task> tasks);
 
-    //查询单条目
-    //Task selectTaskByName(String name);
 }

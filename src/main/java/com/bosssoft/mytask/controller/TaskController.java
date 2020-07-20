@@ -22,8 +22,9 @@ public class TaskController {
     @Resource
     TaskService taskService;
 
-
-    //查询所有条目
+    /**
+     * 查询所有条目
+     */
     @RequestMapping("findAll")
     @ResponseBody
     public jsonResult findAll(HttpSession session){
@@ -46,25 +47,25 @@ public class TaskController {
 
        jsonResult jsonResult = com.bosssoft.mytask.entity.jsonResult.ok(hashMap);
        session.setAttribute("alltasks","jsonResult");
-       //return "alltasks";
-
 
        return jsonResult.ok(hashMap);
     }
 
-    //添加条目
+    /**
+     * 添加条目
+     */
     @PostMapping("addTask")
     public String addTask(String name,Integer typeid,Integer num,String location,String time){
-        if(name!=null&&typeid!=null&&num!=null&&location!=null&&time!=null)
-        {
-
+        if(name!=null&&typeid!=null&&num!=null&&location!=null&&time!=null) {
             Task task = new Task(name,typeid,num,location,time);
             taskService.addTask(task);
         }
         return "redirect:/task/findAll";
     }
 
-    //修改条目
+    /**
+     * 修改条目
+     */
     @PostMapping("updateTask")
     public String updateTaskByName(String oldname,String name,Integer typeid,Integer num,String location,String time){
         if(oldname != null&&name!=null&&typeid!=null&&num!=null&&location!=null&&time!=null){
@@ -77,7 +78,9 @@ public class TaskController {
         return "redirect:/task/findAll";
     }
 
-    //删除条目
+    /**
+     * 删除条目
+     */
     @PostMapping("deleteTask")
     public String deleteTaskByName(String name){
        if(name!= null){

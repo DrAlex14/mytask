@@ -43,9 +43,4 @@ public class TaskServiceImpl implements TaskService{
            task.setTotalprice(totalprice);
        }
     }
-
-//    @Override
-//    public Task selectTaskByName(String name) {
-//        return taskDao.selectTaskByName(name);
-//    }
 }
