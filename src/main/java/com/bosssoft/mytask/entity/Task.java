@@ -17,7 +17,7 @@ public class Task {
     private String location;
     private String time;
     private double totalprice;
-    //private Date date;
+
     public Task(String name,Integer typeid,Integer num,String location,String time){
         this.name = name;
         this.typeid = typeid;
@@ -25,44 +25,5 @@ public class Task {
         this.location = location;
         this.time = time;
     }
-//
-//    public String getLocation() {
-//        return location;
-//    }
-//
-//    public void setLocation(String location) {
-//        this.location = location;
-//    }
-//
-//    public String getName() {
-//        return name;
-//    }
-//
-//    public void setName(String name) {
-//        this.name = name;
-//    }
-//
-//    public int getTypeid() {
-//        return typeid;
-//    }
-//
-//    public void setTypeid(int typeid) {
-//        this.typeid = typeid;
-//    }
-//
-//    public int getNum() {
-//        return num;
-//    }
-//
-//    public void setNum(int num) {
-//        this.num = num;
-//    }
-//
-//    public String getTime() {
-//        return time;
-//    }
-//
-//    public void setTime(String time) {
-//        this.time = time;
-//    }
+
 }

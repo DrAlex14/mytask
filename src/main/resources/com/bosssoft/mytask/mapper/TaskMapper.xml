@@ -19,6 +19,7 @@
     <select id="getItemNum" parameterType="String" resultType="Integer">
         select num from mytask.task where name = #{name};
     </select>
+
     <select id="getItemPrice" parameterType="String" resultType="Double">
         select price from mytask.mall where mall.itemName = #{name};
     </select>
@@ -28,7 +29,4 @@
          delete from mytask.task where name = #{name}
     </delete>
 
-    <!--<select id="selectTaskByName" parameterType="String" resultType="com.bosssoft.mytask.entity.Task">
-        select name,typeid,location,num,time from mytask.task where name = #{name};
-    </select>-->
 </mapper>
