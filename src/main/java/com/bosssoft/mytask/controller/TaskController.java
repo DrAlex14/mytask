@@ -1,13 +1,12 @@
 package com.bosssoft.mytask.controller;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.bosssoft.mytask.entity.Applicant;
 import com.bosssoft.mytask.entity.Task;
-import com.bosssoft.mytask.entity.jsonResult;
 import com.bosssoft.mytask.service.TaskService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 import java.text.DateFormat;
@@ -27,7 +26,7 @@ public class TaskController {
      */
     @RequestMapping("findAll")
     @ResponseBody
-    public jsonResult findAll(HttpSession session){
+    public String findAll(HttpSession session){
        List<Task> tasks = taskService.findAll();
        taskService.totalPrice(tasks);
         Applicant applicant = new Applicant();
@@ -45,10 +44,9 @@ public class TaskController {
         hashMap.put("Tasks",tasks);
         hashMap.put("totalprice",TOTAL_PRICE);
 
-       jsonResult jsonResult = com.bosssoft.mytask.entity.jsonResult.ok(hashMap);
-       session.setAttribute("alltasks","jsonResult");
-
-       return jsonResult.ok(hashMap);
+       String jsonOutPut = JSON.toJSONString(hashMap, SerializerFeature.PrettyFormat);
+        session.setAttribute("alltasks",jsonOutPut);
+       return jsonOutPut;
     }
 
     /**
@@ -69,7 +67,6 @@ public class TaskController {
     @PostMapping("updateTask")
     public String updateTaskByName(String oldname,String name,Integer typeid,Integer num,String location,String time){
         if(oldname != null&&name!=null&&typeid!=null&&num!=null&&location!=null&&time!=null){
-            //Task task = taskService.selectTaskByName(name);
             taskService.deleteTaskByName(oldname);
             Task task = new Task(name,typeid,num,location,time);
             taskService.addTask(task);

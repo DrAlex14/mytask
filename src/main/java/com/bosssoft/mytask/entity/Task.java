@@ -3,10 +3,7 @@ package com.bosssoft.mytask.entity;
 import lombok.*;
 import lombok.experimental.Accessors;
 
-import java.util.Date;
-
 @Data //生成getter,setter等函数
-//@AllArgsConstructor //生成全参数构造函数
 @NoArgsConstructor//生成无参构造函数
 @Accessors(chain = true)
 @ToString
